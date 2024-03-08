@@ -22,12 +22,15 @@ public class StoveCounter : BaseCounter, IHasProgress
 
     [SerializeField] FryingRecipeSO[] fryingRecipeSOArray;
     [SerializeField] BurningRecipeSO[] burningRecipeSOArray;
+    [SerializeField] float burnWarningThreshold = 0.5f;
 
     State _state;
     float _fryingTimer;
     float _burningTimer;
     FryingRecipeSO _fryingRecipeSO;
     BurningRecipeSO _burningRecipeSO;
+
+    public float BurnWarningThreshold => burnWarningThreshold;
 
     void Start()
     {
@@ -183,15 +186,20 @@ public class StoveCounter : BaseCounter, IHasProgress
             }
         }
     }
+
+    public bool IsFried()
+    {
+        return _state == State.Fried;
+    }
     
-    private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
+    bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         FryingRecipeSO fryingRecipeSO = GetFryingRecipeSOWithInput(inputKitchenObjectSO);
         
         return fryingRecipeSO != null;
     }
 
-    private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSO)
+    KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSO)
     {
         FryingRecipeSO fryingRecipeSO = GetFryingRecipeSOWithInput(inputKitchenObjectSO);
         if (fryingRecipeSO != null)
@@ -201,7 +209,7 @@ public class StoveCounter : BaseCounter, IHasProgress
         return null;
     }
 
-    private FryingRecipeSO GetFryingRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
+    FryingRecipeSO GetFryingRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         foreach (var fryingRecipeSO in fryingRecipeSOArray)
         {
@@ -214,7 +222,7 @@ public class StoveCounter : BaseCounter, IHasProgress
         return null;
     }
     
-    private BurningRecipeSO GetBurningRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
+    BurningRecipeSO GetBurningRecipeSOWithInput(KitchenObjectSO inputKitchenObjectSO)
     {
         foreach (var burningRecipeSO in burningRecipeSOArray)
         {
