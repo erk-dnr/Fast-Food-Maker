@@ -1,7 +1,0 @@
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "New #SCRIPTNAME#", menuName = "#SCRIPTNAME#", order = 0)]
-public class #SCRIPTNAME# : ScriptableObject
-{
-    #NOTRIM#
-}

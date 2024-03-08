@@ -1,17 +1,15 @@
 using UnityEngine;
 
-    #ROOTNAMESPACEBEGIN#
 public class #SCRIPTNAME# : MonoBehaviour
 {
 
-    private void Start()
+    void Start()
     {
         #NOTRIM#
     }
 
-    private void Update()
+    void Update()
     {
         #NOTRIM#
     }
 }
-#ROOTNAMESPACEEND#
