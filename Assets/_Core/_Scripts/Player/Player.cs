@@ -22,14 +22,14 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     [SerializeField] private GameInput gameInput;
 
-    private bool _isWalking;
-    private Vector3 _lastInteractDirection;
-    private BaseCounter _selectedCounter;
-    private KitchenObject _kitchenObject;
+    bool _isWalking;
+    Vector3 _lastInteractDirection;
+    BaseCounter _selectedCounter;
+    KitchenObject _kitchenObject;
 
     public bool IsWalking => _isWalking;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance != null)
         {
@@ -38,19 +38,19 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         Instance = this;
     }
 
-    private void Start()
+    void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
         gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
     
-    private void Update()
+    void Update()
     {
         HandleMovement();
         HandleInteractions();
     }
 
-    private void GameInput_OnInteractAction(object sender, EventArgs e)
+    void GameInput_OnInteractAction(object sender, EventArgs e)
     {
         if (!GameManager.Instance.IsGamePlaying)
             return;
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         }
     }
     
-    private void GameInput_OnInteractAlternateAction(object sender, EventArgs e)
+    void GameInput_OnInteractAlternateAction(object sender, EventArgs e)
     {
         if (!GameManager.Instance.IsGamePlaying)
             return;
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     }
     
 
-    private void HandleMovement()
+    void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             
             // attempt only X movement
             Vector3 moveVectorX = new Vector3(moveVector.x, 0f, 0f).normalized;
-            canMove = moveVector.x != 0f && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
+            canMove = Mathf.Abs(moveVector.x) > 0.5f && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
                 playerRadius, moveVectorX, moveDistance);
 
             if (canMove)
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
                 
                 //attempt only Z movement
                 Vector3 moveVectorZ = new Vector3(0f, 0f, moveVector.z).normalized;
-                canMove = moveVector.z != 0f && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
+                canMove = Mathf.Abs(moveVector.z) > 0.5f && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
                     playerRadius, moveVectorZ, moveDistance);
 
                 if (canMove)
@@ -131,7 +131,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         }
     }
 
-    private void HandleInteractions()
+    void HandleInteractions()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
@@ -165,7 +165,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
         }
     }
 
-    private void SetSelectedCounter(BaseCounter selectedCounter)
+    void SetSelectedCounter(BaseCounter selectedCounter)
     {
         _selectedCounter = selectedCounter;
         OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs

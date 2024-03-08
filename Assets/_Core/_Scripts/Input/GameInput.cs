@@ -20,9 +20,9 @@ public class GameInput : MonoBehaviour
         Interact,
         InteractAlternate,
         Pause,
-        Interact_Gamepad,
-        InteractAlternative_Gamepad,
-        Pause_Gamepad
+        Gamepad_Interact,
+        Gamepad_InteractAlternate,
+        Gamepad_Pause
     }
     
     PlayerInputActions _playerInputActions;
@@ -96,6 +96,9 @@ public class GameInput : MonoBehaviour
             Binding.Interact => _playerInputActions.Player.Interact.bindings[0].ToDisplayString(),
             Binding.InteractAlternate => _playerInputActions.Player.InteractAlternate.bindings[0].ToDisplayString(),
             Binding.Pause => _playerInputActions.Player.Pause.bindings[0].ToDisplayString(),
+            Binding.Gamepad_Interact => _playerInputActions.Player.Interact.bindings[1].ToDisplayString(),
+            Binding.Gamepad_InteractAlternate => _playerInputActions.Player.InteractAlternate.bindings[1].ToDisplayString(),
+            Binding.Gamepad_Pause => _playerInputActions.Player.Pause.bindings[1].ToDisplayString()
         };
     }
 
@@ -136,6 +139,19 @@ public class GameInput : MonoBehaviour
                 inputAction = _playerInputActions.Player.Pause;
                 bindingIndex = 0;
                 break;
+            case Binding.Gamepad_Interact:
+                inputAction = _playerInputActions.Player.Interact;
+                bindingIndex = 1;
+                break;
+            case Binding.Gamepad_InteractAlternate:
+                inputAction = _playerInputActions.Player.InteractAlternate;
+                bindingIndex = 1;
+                break;
+            case Binding.Gamepad_Pause:
+                inputAction = _playerInputActions.Player.Pause;
+                bindingIndex = 1;
+                break;
+                
         }
         
         inputAction.PerformInteractiveRebinding(bindingIndex)

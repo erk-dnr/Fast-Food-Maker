@@ -54,7 +54,9 @@ public class OptionsUI : MonoBehaviour
         interactButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.Interact); });
         interactAltButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.InteractAlternate); });
         pauseButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.Pause); });
-        
+        interactGPButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.Gamepad_Interact); });
+        interactAltGPButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.Gamepad_InteractAlternate); });
+        pauseGPButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.Gamepad_Pause); });
     }
 
     void Start()
@@ -97,6 +99,12 @@ public class OptionsUI : MonoBehaviour
             GameInput.Instance.GetBindingText(GameInput.Binding.InteractAlternate);
         pauseButton.GetComponentInChildren<TextMeshProUGUI>().text =
             GameInput.Instance.GetBindingText(GameInput.Binding.Pause);
+        interactGPButton.GetComponentInChildren<TextMeshProUGUI>().text =
+            GameInput.Instance.GetBindingText(GameInput.Binding.Gamepad_Interact);
+        interactAltGPButton.GetComponentInChildren<TextMeshProUGUI>().text =
+            GameInput.Instance.GetBindingText(GameInput.Binding.Gamepad_InteractAlternate);
+        pauseGPButton.GetComponentInChildren<TextMeshProUGUI>().text =
+            GameInput.Instance.GetBindingText(GameInput.Binding.Gamepad_Pause);
 
     }
 
