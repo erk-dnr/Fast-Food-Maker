@@ -29,6 +29,8 @@ public class OptionsUI : MonoBehaviour
     [Space]
     [SerializeField] Button closeButton;
 
+    Action _onCloseButtonAction;
+
     public float VolumeScale => 1f / volumeIncrementSteps;
 
     void Awake()
@@ -45,7 +47,11 @@ public class OptionsUI : MonoBehaviour
             UpdateVisual();
         });
         
-        closeButton.onClick.AddListener(() => { Hide(); });
+        closeButton.onClick.AddListener(() =>
+        {
+            Hide();
+            _onCloseButtonAction();
+        });
         
         moveUpButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.MoveUp); });
         moveDownButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.MoveDown); });
@@ -123,9 +129,12 @@ public class OptionsUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Show()
+    public void Show(Action onCloseButtonAction)
     {
+        _onCloseButtonAction = onCloseButtonAction;
         gameObject.SetActive(true);
+        
+        closeButton.Select();
     }
     
     public void HidePressToRebindScreen()
