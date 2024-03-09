@@ -12,6 +12,7 @@ public class ClearCounter : BaseCounter
             {
                 // player is carrying something
                 player.GetKitchenObject().SetKitchenObjectParent(this);
+                // player drops the plate
             }
             else
             {

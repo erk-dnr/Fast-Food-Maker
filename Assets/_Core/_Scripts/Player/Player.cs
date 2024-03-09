@@ -28,6 +28,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     KitchenObject _kitchenObject;
 
     public bool IsWalking => _isWalking;
+    public bool HasPlate => _kitchenObject.TryGetPlate(out PlateKitchenObject plate);
 
     void Awake()
     {
