@@ -1,11 +1,11 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Player : MonoBehaviour, IKitchenObjectParent
+public class Player : NetworkBehaviour, IKitchenObjectParent
 {
     
-    public static Player Instance { get; private set; }
+    // public static Player Instance { get; private set; }
 
     public event EventHandler OnPickedSomething;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     [SerializeField] private LayerMask countersLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
 
-    [SerializeField] private GameInput gameInput;
+    // [SerializeField] private GameInput gameInput;
 
     bool _isWalking;
     Vector3 _lastInteractDirection;
@@ -32,17 +32,17 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.LogError("There is more than one player instance!");
-        }
-        Instance = this;
+        // if (Instance != null)
+        // {
+        //     Debug.LogError("There is more than one player instance!");
+        // }
+        // Instance = this;
     }
 
     void Start()
     {
-        gameInput.OnInteractAction += GameInput_OnInteractAction;
-        gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
     
     void Update()
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     void HandleMovement()
     {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
         
         // make movement frane rate independent
         Vector3 moveVector = new Vector3(inputVector.x, 0f, inputVector.y);
@@ -134,7 +134,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     void HandleInteractions()
     {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
 
         Vector3 moveVector = new Vector3(inputVector.x, 0f, inputVector.y);
         

@@ -3,6 +3,8 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 // This component will not persist on the GameObject, it will destroy itself immediately after renaming the object
 public class RemoveSuffixFromGameObject : MonoBehaviour
 {
@@ -33,3 +35,5 @@ public class RemoveSuffixFromGameObject : MonoBehaviour
         DestroyImmediate(this);
     }
 }
+
+#endif

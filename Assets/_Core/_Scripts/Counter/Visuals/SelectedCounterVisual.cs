@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SelectedCounterVisual : MonoBehaviour
@@ -8,7 +9,12 @@ public class SelectedCounterVisual : MonoBehaviour
 
     private void Start() 
     {
-        Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+        // Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
+    }
+
+    void OnDestroy()
+    {
+        // Player.Instance.OnSelectedCounterChanged -= Player_OnSelectedCounterChanged;
     }
 
     private void Player_OnSelectedCounterChanged(object sender, Player.OnSelectedCounterChangedEventArgs e)
