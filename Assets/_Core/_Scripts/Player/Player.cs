@@ -5,7 +5,10 @@ using UnityEngine;
 public class Player : NetworkBehaviour, IKitchenObjectParent
 {
     
-    // public static Player Instance { get; private set; }
+    public static Player LocalInstance { get; private set; }
+
+    public static event EventHandler OnAnyPlayerSpawned;
+    public static event EventHandler OnAnyPickedSomething;
 
     public event EventHandler OnPickedSomething;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
@@ -30,21 +33,22 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     public bool IsWalking => _isWalking;
     public bool HasPlate => _kitchenObject.TryGetPlate(out PlateKitchenObject plate);
 
-    void Awake()
-    {
-        // if (Instance != null)
-        // {
-        //     Debug.LogError("There is more than one player instance!");
-        // }
-        // Instance = this;
-    }
-
     void Start()
     {
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
         GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
-    
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            LocalInstance = this;
+        }
+        
+        OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+    }
+
     void Update()
     {
         if (!IsOwner) return;
@@ -190,6 +194,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         if (_kitchenObject != null)
         {
             OnPickedSomething?.Invoke(this, EventArgs.Empty);
+            OnAnyPickedSomething?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -201,5 +206,10 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     public void ClearKitchenObject()
     {
         _kitchenObject = null;
+    }
+
+    public NetworkObject GetNetworkObject()
+    {
+        return NetworkObject;
     }
 }

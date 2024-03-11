@@ -1,8 +1,9 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
 [SelectionBase]
-public class BaseCounter : MonoBehaviour, IKitchenObjectParent
+public class BaseCounter : NetworkBehaviour, IKitchenObjectParent
 {
 
     public static event EventHandler OnAnyObjectPlacedHere;
@@ -45,6 +46,11 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
     public void ClearKitchenObject()
     {
         _kitchenObject = null;
+    }
+
+    public NetworkObject GetNetworkObject()
+    {
+        return NetworkObject;
     }
 
     public virtual Transform GetCounterTopPoint()
