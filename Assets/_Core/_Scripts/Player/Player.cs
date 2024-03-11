@@ -47,7 +47,9 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     
     void Update()
     {
-        HandleMovement();
+        if (!IsOwner) return;
+        
+        HandleMovementServerAuth();
         HandleInteractions();
     }
 
@@ -72,12 +74,17 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
             _selectedCounter.InteractAlternate(this);
         }
     }
-    
 
-    void HandleMovement()
+
+    void HandleMovementServerAuth()
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-        
+        HandleMovementServerRPC(inputVector);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void HandleMovementServerRPC(Vector2 inputVector)
+    {
         // make movement frane rate independent
         Vector3 moveVector = new Vector3(inputVector.x, 0f, inputVector.y);
         float moveDistance = movementSpeed * Time.deltaTime;
@@ -120,6 +127,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
                 }
             }
         }
+        
 
         if (canMove)
         {

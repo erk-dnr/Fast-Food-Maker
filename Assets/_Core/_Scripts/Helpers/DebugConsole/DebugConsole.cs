@@ -26,6 +26,7 @@ public class DebugConsole : MonoBehaviour
     void Start()
     {
         _initialHeight = displayRect.anchoredPosition.y;
+        displayText.text = "";
     }
 
     void OnEnable()

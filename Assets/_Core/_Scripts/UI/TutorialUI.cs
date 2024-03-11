@@ -23,7 +23,8 @@ public class TutorialUI : MonoBehaviour
         GameInput.Instance.OnBindingRebind += GameInput_OnBindRebind;
         
         UpdateVisual();
-        Show();
+        // Show();
+        Hide();
     }
 
     void OnDestroy()

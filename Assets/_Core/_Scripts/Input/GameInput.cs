@@ -54,6 +54,19 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Player.Pause.performed += Pause_performed;
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.LogWarning("Right-Click");
+        }
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            Debug.LogError("Middle-Clicl!!!");
+        }
+    }
+
     void OnDestroy()
     {
         _playerInputActions.Player.Disable();

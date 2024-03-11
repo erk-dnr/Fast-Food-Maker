@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     }
     
     [SerializeField] float countdownTimerMax = 3f;
-    [SerializeField] float gameplayTimerMax = 10f;
+    [SerializeField] float gameplayTimerMax = 300f;
     
     float _countdownTimer;
     float _gameplayTimer;
@@ -49,7 +49,11 @@ public class GameManager : MonoBehaviour
         GameInput.Instance.OnPauseAction += GameInput_OnPause;
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
         
-        _state = State.WaitingToStart;
+        // _state = State.WaitingToStart;
+        // DEBUG TRIGGER GAME START AUTOMATICALLY
+        _state = State.CountdownToStart;
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
+        
         _countdownTimer = countdownTimerMax;
         _gameplayTimer = gameplayTimerMax;
     }
