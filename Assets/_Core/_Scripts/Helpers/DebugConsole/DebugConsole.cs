@@ -69,22 +69,22 @@ public class DebugConsole : MonoBehaviour
 
     void Log(string newLog)
     {
-        displayText.text = $"[{GetTime()}] - {newLog}\n{displayText.text}";
+        displayText.text = $"[{GetTime()}] {newLog}\n{displayText.text}";
     }
 
     void LogWarning(string newLog)
     {
-        displayText.text = $"[{GetTime()}] - <color=orange>{newLog}</color>\n{displayText.text}";
+        displayText.text = $"[{GetTime()}] <color=orange>{newLog}</color>\n{displayText.text}";
     }
     
     void LogError(string newLog)
     {
-        displayText.text = $"[{GetTime()}] - <color=red>{newLog}</color>\n{displayText.text}";
+        displayText.text = $"[{GetTime()}] <color=red>{newLog}</color>\n{displayText.text}";
     }
 
     void LogAssertion(string newLog)
     {
-        displayText.text = $"[{GetTime()}] - <color=blue>{newLog}</color>\n{displayText.text}";
+        displayText.text = $"[{GetTime()}] <color=blue>{newLog}</color>\n{displayText.text}";
     }
     
     string GetTime() {

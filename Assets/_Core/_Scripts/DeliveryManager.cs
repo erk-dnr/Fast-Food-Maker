@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class DeliveryManager : MonoBehaviour
+public class DeliveryManager : NetworkBehaviour
 {
     
     public static DeliveryManager Instance { get; private set; }
@@ -41,6 +42,9 @@ public class DeliveryManager : MonoBehaviour
 
     void Update()
     {
+        // only the server spawns the recipes
+        if (!IsServer) return;
+        
         if (!GameManager.Instance.IsGamePlaying)
             return;
         
@@ -52,12 +56,22 @@ public class DeliveryManager : MonoBehaviour
             if (_waitingRecipes.Count < waitingRecipesMax)
             {
                 // create new recipe
-                RecipeSO waitingRecipeSO = recipeListSO.recipeList[Random.Range(0, recipeListSO.recipeList.Count)];
-                _waitingRecipes.Add(waitingRecipeSO);
+                int waitingRecipesIndex = Random.Range(0, recipeListSO.recipeList.Count);
                 
-                OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
+                SpawnNewWaitingRecipeClientRPC(waitingRecipesIndex);
             }
         }
+    }
+
+    // we send the index of the list, instead of the RecipeSO directly,
+    // because int is serializable
+    [ClientRpc]
+    void SpawnNewWaitingRecipeClientRPC(int waitingRecipesIndex)
+    {
+        RecipeSO waitingRecipeSO = recipeListSO.recipeList[waitingRecipesIndex];
+        _waitingRecipes.Add(waitingRecipeSO);
+        
+        OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
     }
 
     public void DeliverRecipe(PlateKitchenObject plateKitchenObject)
@@ -96,17 +110,41 @@ public class DeliveryManager : MonoBehaviour
                 if (plateContentMatchesRecipe)
                 {
                     // player delivereed correct recipe
-                    _successfulRecipesAmount++;
-                    _waitingRecipes.RemoveAt(i);
-                    
-                    OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
-                    OnRecipeSucceded?.Invoke(this, EventArgs.Empty);
+                    DeliverCorrectRecipeServerRpc(i);
                     return;
                 }
             }
         }
         
         // no matches found -> player did not deliver a correct recipe
+        DeliverIncorrectRecipeServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void DeliverCorrectRecipeServerRpc(int waitingRecipesIndex)
+    {
+        DeliverCorrectRecipeClientRpc(waitingRecipesIndex);
+    }
+    
+    [ClientRpc]
+    void DeliverCorrectRecipeClientRpc(int waitingRecipesIndex)
+    {
+        _successfulRecipesAmount++;
+        _waitingRecipes.RemoveAt(waitingRecipesIndex);
+                    
+        OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+        OnRecipeSucceded?.Invoke(this, EventArgs.Empty);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void DeliverIncorrectRecipeServerRpc()
+    {
+        DeliverIncorrectRecipeClientRpc();
+    }
+    
+    [ClientRpc]
+    void DeliverIncorrectRecipeClientRpc()
+    {
         Debug.Log("Player did not deliver correct recipe");
         OnRecipeFailed?.Invoke(this, EventArgs.Empty);
     }
