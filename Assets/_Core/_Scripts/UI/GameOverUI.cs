@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +9,19 @@ public class GameOverUI : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI recipesDeliveredAmountText;
     [SerializeField] TextMeshProUGUI highscoreText;
+    [SerializeField] Button playAgainButton; // TODO
     [SerializeField] Button resetHighscoreButton;
 
     const string PLAYER_PREFS_HIGHSCORE = "Highscore";
 
     void Awake()
     {
+        playAgainButton.onClick.AddListener(() =>
+        {
+            NetworkManager.Singleton.Shutdown();
+            Loader.Load(Loader.Scene.MainMenuScene);
+        });
+        
         resetHighscoreButton.onClick.AddListener(() =>
         {
             ResetHighscore();

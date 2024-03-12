@@ -52,6 +52,16 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         transform.position = spawnPositionList[(int)OwnerClientId];
         
         OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnect;
+        }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_OnClientDisconnect;
     }
 
     void Update()
@@ -81,6 +91,15 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         if (_selectedCounter != null)
         {
             _selectedCounter.InteractAlternate(this);
+        }
+    }
+    
+    void NetworkManager_OnClientDisconnect(ulong clientId)
+    {
+        // destroyed attached object to a player that is disconnecting
+        if (clientId == OwnerClientId && HasKitchenObjectAttached)
+        {
+            KitchenObject.DestroyKitchenObject(GetKitchenObject());
         }
     }
     

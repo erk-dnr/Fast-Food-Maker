@@ -1,13 +1,18 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KitchenGameMultiplayer : NetworkBehaviour
 {
 
     public static KitchenGameMultiplayer Instance { get; private set; }
 
+    public event EventHandler OnTryingToJoinGame;
+    public event EventHandler OnFailedToJoinGame;
+
     [SerializeField] KitchenObjectListSO kitchenObjectList;
+    [SerializeField] int maxPlayerAmount = 4;
     
 
     void Awake()
@@ -20,6 +25,47 @@ public class KitchenGameMultiplayer : NetworkBehaviour
         { 
             Instance = this; 
         }
+        
+        // persist KitchenGameMultiplayer from LobbyScene
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void StartHost()
+    {
+        NetworkManager.Singleton.ConnectionApprovalCallback += NetworkManager_ConnectionApproval;
+        NetworkManager.Singleton.StartHost();
+    }
+
+    public void StartClient()
+    {
+        OnTryingToJoinGame?.Invoke(this, EventArgs.Empty);
+
+        NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+        NetworkManager.Singleton.StartClient();
+    }
+
+    void NetworkManager_OnClientDisconnectCallback(ulong clientId)
+    {
+        OnFailedToJoinGame?.Invoke(this, EventArgs.Empty);
+    }
+
+    void NetworkManager_ConnectionApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+    {
+        if (SceneManager.GetActiveScene().name != Loader.Scene.CharacterSelectScene.ToString())
+        {
+            response.Approved = false;
+            response.Reason = "Game has already started";
+            return;
+        }
+
+        if (NetworkManager.Singleton.ConnectedClientsIds.Count >= maxPlayerAmount)
+        {
+            response.Approved = false;
+            response.Reason = "Lobby is full";
+            return;
+        }
+        
+        response.Approved = true;
     }
     
     public void SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent parent)

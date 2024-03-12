@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
@@ -22,7 +23,8 @@ public class GameManager : NetworkBehaviour
         GamePlaying,
         GameOver
     }
-    
+
+    [SerializeField] Transform playerPrefab;
     [SerializeField] float countdownTimerMax = 3f;
     [SerializeField] float gameplayTimerMax = 120f;
     
@@ -34,11 +36,12 @@ public class GameManager : NetworkBehaviour
     bool _isLocalPlayerReady = false;
     Dictionary<ulong, bool> _playerReadyDictionary;
     Dictionary<ulong, bool> _playerPausedDictionary;
+    bool _autoCheckGamePauseState = false;
 
-    public bool IsGamePlaying => _state.Value == State.GamePlaying;
+    public bool IsWaitingToStart => _state.Value == State.WaitingToStart;
     public bool IsCountdownActive => _state.Value == State.CountdownToStart;
+    public bool IsGamePlaying => _state.Value == State.GamePlaying;
     public bool IsGameOver => _state.Value == State.GameOver;
-
     public bool IsLocalPlayerReady => _isLocalPlayerReady;
     
     public bool IsLocalGamePaused => _isLocalGamePaused;
@@ -71,12 +74,20 @@ public class GameManager : NetworkBehaviour
         
         _countdownTimer.Value = countdownTimerMax;
         _gameplayTimer.Value = gameplayTimerMax;
+
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnect;
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += NetworkSceneManager_OnLoadEventCompleted;
+        }
     }
 
     public override void OnNetworkDespawn()
     {
         _state.OnValueChanged -= State_OnValueChanged;
         _isGamePaused.OnValueChanged -= IsGamePaused_OnValueChanged;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_OnClientDisconnect;
+        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= NetworkSceneManager_OnLoadEventCompleted;
     }
 
     public override void OnDestroy()
@@ -115,7 +126,16 @@ public class GameManager : NetworkBehaviour
                 break;
         }
     }
-    
+
+    void LateUpdate()
+    {
+        if (_autoCheckGamePauseState)
+        {
+            _autoCheckGamePauseState = false;
+            CheckGamePausedState();
+        }
+    }
+
     void GameInput_OnPause(object sender, EventArgs e)
     {
         TogglePauseGame();
@@ -151,6 +171,20 @@ public class GameManager : NetworkBehaviour
             Time.timeScale = 1f;
             
             OnMultiplayerGameResumed?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    
+    void NetworkManager_OnClientDisconnect(ulong clientId)
+    {
+        _autoCheckGamePauseState = true;
+    }
+    
+    void NetworkSceneManager_OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
+    {
+        foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            Transform playerTransform = Instantiate(playerPrefab);
+            playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
         }
     }
 

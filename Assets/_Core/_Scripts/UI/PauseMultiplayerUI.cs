@@ -4,7 +4,7 @@ using UnityEngine;
 public class PauseMultiplayerUI : MonoBehaviour
 {
 
-    void Awake()
+    void Start()
     {
         GameManager.Instance.OnMultiplayerGamePaused += GameManager_OnMultiplayerGamePaused;
         GameManager.Instance.OnMultiplayerGameResumed += GameManager_OnMultiplayerGameResumed;
@@ -20,15 +20,8 @@ public class PauseMultiplayerUI : MonoBehaviour
 
     void GameManager_OnMultiplayerGamePaused(object sender, EventArgs e)
     {
-        // only show this screen for unpaused clients
-        if (!GameManager.Instance.IsLocalGamePaused)
-        {
-            Show();
-        }
-        else
-        {
-            Hide();
-        }
+        // TODO: only show this screen for unpaused clients
+        Show();
     }
 
     void GameManager_OnMultiplayerGameResumed(object sender, EventArgs e)
