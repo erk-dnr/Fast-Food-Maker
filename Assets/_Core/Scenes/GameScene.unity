@@ -379,6 +379,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 735332100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -939,6 +944,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2882404578
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2522,6 +2532,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4273110608
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2684,6 +2699,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541777365029751326, guid: 00d76cd6e2cbf0a4a8a329a3753123ec,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2486341656
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3397,6 +3417,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 72566629
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3732,6 +3757,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ContainerCounter_Cabbage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8188144144875489972, guid: 5d8922582c843cb478a2481bba2d943e,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4175023057
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5219,6 +5249,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5597795525050474331, guid: 374647b1cff3e7146a85e8c0b4d5a71b,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 30139180
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5892,6 +5927,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1551049837
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5959,6 +5999,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3777496299
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6335,6 +6380,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192443387512410035, guid: 3e4f29b60c8e64842828f4482f3ce4c1,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1880658299
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7394,6 +7444,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4074111929
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8090,6 +8145,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3969417104
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8220,6 +8280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597795525050474331, guid: 374647b1cff3e7146a85e8c0b4d5a71b,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3276292838
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8536,6 +8601,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2942781741
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8603,6 +8673,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlatesCounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842411714589112728, guid: 9c61a220c95ffdc478be5d56ca5cabab,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1139547587
       objectReference: {fileID: 0}
     - target: {fileID: 4813564759681857110, guid: 9c61a220c95ffdc478be5d56ca5cabab,
         type: 3}
@@ -9351,6 +9426,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1309042438}
     m_Modifications:
+    - target: {fileID: 7681356114352682599, guid: 1bf1139a0f3789b4f9941b5127b7668d,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1072582695
+      objectReference: {fileID: 0}
     - target: {fileID: 7716636652546132421, guid: 1bf1139a0f3789b4f9941b5127b7668d,
         type: 3}
       propertyPath: m_Name
@@ -9899,6 +9979,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1309042438}
     m_Modifications:
+    - target: {fileID: 3519280833543334327, guid: e2b95802baea9c84f86ceb9965b47371,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2378718308
+      objectReference: {fileID: 0}
     - target: {fileID: 3555688470476314133, guid: e2b95802baea9c84f86ceb9965b47371,
         type: 3}
       propertyPath: m_Name
@@ -10130,6 +10215,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2127330384
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10197,6 +10287,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2579398145
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11291,6 +11386,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3651896347
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11912,6 +12012,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CuttingCounter (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812454510038428580, guid: bcf4557e7f8e03d41b2a9b86dec70865,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 101272258
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14211,6 +14316,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3541777365029751326, guid: 00d76cd6e2cbf0a4a8a329a3753123ec,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3628943193
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14415,6 +14525,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1235307276
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15831,6 +15946,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 609574782
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16350,6 +16470,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3442550078
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16608,6 +16733,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3690516186
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17082,6 +17212,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CuttingCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 1812454510038428580, guid: bcf4557e7f8e03d41b2a9b86dec70865,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2835648558
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17290,6 +17425,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809352016553907335, guid: 3c4afb5834f05cd4f8922fd77ec6c2bb,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1499955784
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17417,6 +17557,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1309042438}
     m_Modifications:
+    - target: {fileID: 4180774725843599937, guid: d9b4dda417d33c14e8cb35980c48e6a8,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2707427756
+      objectReference: {fileID: 0}
     - target: {fileID: 4290717550302952929, guid: d9b4dda417d33c14e8cb35980c48e6a8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17545,6 +17690,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ContainerCounter_CheeseBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 536594628771770700, guid: 1d37646e226b1244d8a9152c7a1401d2,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4166779064
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
