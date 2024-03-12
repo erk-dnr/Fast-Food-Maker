@@ -67,7 +67,7 @@ public class OptionsUI : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.OnGameResumed += GameManager_OnGameResumed;
+        GameManager.Instance.OnLocalGameResumed += LocalGameManagerOnLocalGameResumed;
         
         HidePressToRebindScreen();
         Hide();
@@ -76,10 +76,10 @@ public class OptionsUI : MonoBehaviour
 
     void OnDestroy()
     {
-        GameManager.Instance.OnGameResumed -= GameManager_OnGameResumed;
+        GameManager.Instance.OnLocalGameResumed -= LocalGameManagerOnLocalGameResumed;
     }
 
-    void GameManager_OnGameResumed(object sender, EventArgs e)
+    void LocalGameManagerOnLocalGameResumed(object sender, EventArgs e)
     {
         Hide();
     }
