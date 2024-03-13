@@ -23,6 +23,11 @@ public class HostDisconnectUI : MonoBehaviour
         Hide();
     }
 
+    void OnDestroy()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_OnClientDisconnect;
+    }
+
     void NetworkManager_OnClientDisconnect(ulong clientId)
     {
         if (clientId == NetworkManager.ServerClientId)
