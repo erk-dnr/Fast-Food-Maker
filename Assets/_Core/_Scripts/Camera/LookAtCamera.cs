@@ -14,22 +14,30 @@ public class LookAtCamera : MonoBehaviour
 
     [SerializeField] Mode mode;
     
+    Camera _camera;
+
+    void Awake()
+    {
+        _camera = Camera.main;
+    }
+
     void LateUpdate()
     {
         switch (mode)
         {
             case Mode.LookAt:
-                transform.LookAt(Camera.main.transform);
+                transform.LookAt(_camera.transform);
                 break;
             case Mode.LookAtInverted:
-                Vector3 dirFromCamera = transform.position - Camera.main.transform.position;
-                transform.LookAt(transform.position + dirFromCamera);
+                var position = transform.position;
+                Vector3 dirFromCamera = position - _camera.transform.position;
+                transform.LookAt(position + dirFromCamera);
                 break;
             case Mode.CameraForward:
-                transform.forward = Camera.main.transform.forward;
+                transform.forward = _camera.transform.forward;
                 break;
             case Mode.CameraForwardInverted:
-                transform.forward = -Camera.main.transform.forward;
+                transform.forward = -_camera.transform.forward;
                 break;
         }
     }

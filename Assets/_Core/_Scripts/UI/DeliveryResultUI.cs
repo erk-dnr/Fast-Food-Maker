@@ -14,8 +14,9 @@ public class DeliveryResultUI : MonoBehaviour
     [SerializeField] Color failColor;
     [SerializeField] Sprite successSprite;
     [SerializeField] Sprite failSprite;
-
+    
     const string POPUP = "Popup";
+    static readonly int Popup = Animator.StringToHash(POPUP);
 
     Animator _animator;
 
@@ -41,7 +42,7 @@ public class DeliveryResultUI : MonoBehaviour
     void DeliveryManager_OnRecipeSuccess(object sender, EventArgs e)
     {
         Show();
-        _animator.SetTrigger(POPUP);
+        _animator.SetTrigger(Popup);
         backgroundImage.color = successColor;
         icon.sprite = successSprite;
         message.text = "Delivery\nSuccess";
@@ -50,7 +51,7 @@ public class DeliveryResultUI : MonoBehaviour
     void DeliveryManager_OnRecipeFailed(object sender, EventArgs e)
     {
         Show();
-        _animator.SetTrigger(POPUP);
+        _animator.SetTrigger(Popup);
         backgroundImage.color = failColor;
         icon.sprite = failSprite;
         message.text = "Delivery\nFailed";

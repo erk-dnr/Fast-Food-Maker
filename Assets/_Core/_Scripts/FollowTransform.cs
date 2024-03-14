@@ -4,6 +4,7 @@ using UnityEngine;
 public class FollowTransform : MonoBehaviour
 {
 
+    Transform _thisTransform;
     Transform _targetTransform;
 
     void LateUpdate()
@@ -13,8 +14,9 @@ public class FollowTransform : MonoBehaviour
             return;
         }
 
-        transform.position = _targetTransform.position;
-        transform.rotation = _targetTransform.rotation;
+        _thisTransform = transform;
+        _thisTransform.position = _targetTransform.position;
+        _thisTransform.rotation = _targetTransform.rotation;
     }
 
     public void SetTargetTransform(Transform targetTransform)

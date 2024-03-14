@@ -112,7 +112,8 @@ public class GameInput : MonoBehaviour
             Binding.Pause => _playerInputActions.Player.Pause.bindings[0].ToDisplayString(),
             Binding.Gamepad_Interact => _playerInputActions.Player.Interact.bindings[1].ToDisplayString(),
             Binding.Gamepad_InteractAlternate => _playerInputActions.Player.InteractAlternate.bindings[1].ToDisplayString(),
-            Binding.Gamepad_Pause => _playerInputActions.Player.Pause.bindings[1].ToDisplayString()
+            Binding.Gamepad_Pause => _playerInputActions.Player.Pause.bindings[1].ToDisplayString(),
+            _ => throw new ArgumentOutOfRangeException(nameof(binding), binding, null)
         };
     }
 

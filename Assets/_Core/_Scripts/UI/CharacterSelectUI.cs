@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Lobbies.Models;

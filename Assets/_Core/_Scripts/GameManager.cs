@@ -32,6 +32,7 @@ public class GameManager : NetworkBehaviour
     NetworkVariable<float> _countdownTimer = new NetworkVariable<float>();
     NetworkVariable<float> _gameplayTimer = new NetworkVariable<float>();
     NetworkVariable<bool> _isGamePaused = new NetworkVariable<bool>(false);
+    
     bool _isLocalGamePaused = false;
     bool _isLocalPlayerReady = false;
     Dictionary<ulong, bool> _playerReadyDictionary;

@@ -1,4 +1,3 @@
-using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,6 +5,7 @@ public class PlayerAnimator : NetworkBehaviour
 {
 
     const string IS_WALKING = "IsWalking";
+    static readonly int IsWalking = Animator.StringToHash(IS_WALKING);
 
     [SerializeField] Player player;
 
@@ -20,6 +20,6 @@ public class PlayerAnimator : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        _animator.SetBool(IS_WALKING, player.IsWalking);
+        _animator.SetBool(IsWalking, player.IsWalking);
     }
 }
