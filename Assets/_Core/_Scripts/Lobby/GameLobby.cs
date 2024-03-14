@@ -76,7 +76,9 @@ public class GameLobby : MonoBehaviour
         if (UnityServices.State != ServicesInitializationState.Initialized)
         {
             InitializationOptions initializationOptions = new InitializationOptions();
-            initializationOptions.SetProfile(Random.Range(0, 1000).ToString());
+            
+            // uncomment for testing multiple builds, not necessary for final game
+            // initializationOptions.SetProfile(Random.Range(0, 1000).ToString());
             
             await UnityServices.InitializeAsync(initializationOptions);
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
