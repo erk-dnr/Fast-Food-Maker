@@ -33,11 +33,11 @@ public class GameManager : NetworkBehaviour
     NetworkVariable<float> _gameplayTimer = new NetworkVariable<float>();
     NetworkVariable<bool> _isGamePaused = new NetworkVariable<bool>(false);
     
-    bool _isLocalGamePaused = false;
-    bool _isLocalPlayerReady = false;
+    bool _isLocalGamePaused;
+    bool _isLocalPlayerReady;
+    bool _autoCheckGamePauseState;
     Dictionary<ulong, bool> _playerReadyDictionary;
     Dictionary<ulong, bool> _playerPausedDictionary;
-    bool _autoCheckGamePauseState = false;
 
     public bool IsWaitingToStart => _state.Value == State.WaitingToStart;
     public bool IsCountdownActive => _state.Value == State.CountdownToStart;
@@ -65,7 +65,7 @@ public class GameManager : NetworkBehaviour
     void Start()
     {
         GameInput.Instance.OnPauseAction += GameInput_OnPause;
-        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        GameInput.Instance.OnInteractAction += GameInput_OnInteract;
     }
 
     public override void OnNetworkSpawn()
@@ -87,14 +87,18 @@ public class GameManager : NetworkBehaviour
     {
         _state.OnValueChanged -= State_OnValueChanged;
         _isGamePaused.OnValueChanged -= IsGamePaused_OnValueChanged;
-        NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_OnClientDisconnect;
-        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= NetworkSceneManager_OnLoadEventCompleted;
+
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback -= NetworkManager_OnClientDisconnect;
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= NetworkSceneManager_OnLoadEventCompleted;
+        }
     }
 
     public override void OnDestroy()
     {
         GameInput.Instance.OnPauseAction -= GameInput_OnPause;
-        GameInput.Instance.OnInteractAction -= GameInput_OnInteractAction;
+        GameInput.Instance.OnInteractAction -= GameInput_OnInteract;
     }
 
     void Update()
@@ -112,6 +116,7 @@ public class GameManager : NetworkBehaviour
                 if (_countdownTimer.Value <= 0f)
                 {
                     _state.Value = State.GamePlaying;
+                    _gameplayTimer.Value = gameplayTimerMax;
                 }
 
                 break;
@@ -142,15 +147,13 @@ public class GameManager : NetworkBehaviour
         TogglePauseGame();
     }
 
-    void GameInput_OnInteractAction(object sender, EventArgs e)
+    void GameInput_OnInteract(object sender, EventArgs e)
     {
         if (_state.Value == State.WaitingToStart)
         {
             _isLocalPlayerReady = true;
             OnLocalPlayerReadyChanged?.Invoke(this, EventArgs.Empty);
-            
             SetPlayerReadyServerRpc();
-            
         }
     }
     
@@ -192,6 +195,7 @@ public class GameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void SetPlayerReadyServerRpc(ServerRpcParams serverRpcParams = default)
     {
+        Debug.Log(serverRpcParams.Receive.SenderClientId);
         ulong senderClientId = serverRpcParams.Receive.SenderClientId;
         _playerReadyDictionary[senderClientId] = true;
 

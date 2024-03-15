@@ -55,7 +55,6 @@ public class GameLobby : MonoBehaviour
         
         DontDestroyOnLoad(gameObject);
         
-        InitializeUnityAuthentication();
         _queryLobbyOptions = new QueryLobbiesOptions
         {
             Filters = new List<QueryFilter>
@@ -63,6 +62,8 @@ public class GameLobby : MonoBehaviour
                 new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "1", QueryFilter.OpOptions.GE)
             }
         };
+        
+        InitializeUnityAuthentication();
     }
     
     void Update()
