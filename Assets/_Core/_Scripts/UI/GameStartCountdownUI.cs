@@ -7,6 +7,7 @@ public class GameStartCountdownUI : MonoBehaviour
 {
 
     const string NUMBER_POPUP = "NumberPopup";
+    static readonly int NumberPopup = Animator.StringToHash(NUMBER_POPUP);
 
     [SerializeField] TextMeshProUGUI countdownText;
 
@@ -38,7 +39,7 @@ public class GameStartCountdownUI : MonoBehaviour
         if (_previousCountdownNumber != countdownNumber)
         {
             _previousCountdownNumber = countdownNumber;
-            _animator.SetTrigger(NUMBER_POPUP);
+            _animator.SetTrigger(NumberPopup);
             SoundManager.Instance.PlayCountdownSound();
         }
     }

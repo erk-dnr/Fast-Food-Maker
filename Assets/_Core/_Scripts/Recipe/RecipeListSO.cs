@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 //[CreateAssetMenu(fileName = "New RecipeList SO", menuName = "SO/Recipe List")]

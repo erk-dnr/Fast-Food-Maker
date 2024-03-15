@@ -1,22 +1,25 @@
-using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerAnimator : MonoBehaviour
+public class PlayerAnimator : NetworkBehaviour
 {
 
-    private const string IS_WALKING = "IsWalking";
+    const string IS_WALKING = "IsWalking";
+    static readonly int IsWalking = Animator.StringToHash(IS_WALKING);
 
-    [SerializeField] private Player player;
+    [SerializeField] Player player;
 
-    private Animator _animator;
+    Animator _animator;
 
-    private void Awake()
+    void Awake()
     {
         _animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
-        _animator.SetBool(IS_WALKING, player.IsWalking);
+        if (!IsOwner) return;
+
+        _animator.SetBool(IsWalking, player.IsWalking);
     }
 }

@@ -7,6 +7,7 @@ public class StoveBurnFlashingBarUI : MonoBehaviour
     [SerializeField] StoveCounter stoveCounter;
 
     const string IS_FLASHING = "IsFlashing";
+    static readonly int IsFlashing = Animator.StringToHash(IS_FLASHING);
 
     Animator _animator;
 
@@ -18,7 +19,7 @@ public class StoveBurnFlashingBarUI : MonoBehaviour
     void Start()
     {
         stoveCounter.OnProgressChanged += StoveCounter_OnProgressChanged;
-        _animator.SetBool(IS_FLASHING, false);
+        _animator.SetBool(IsFlashing, false);
     }
 
     void OnDestroy()
@@ -29,6 +30,6 @@ public class StoveBurnFlashingBarUI : MonoBehaviour
     void StoveCounter_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
     {
         bool flash = stoveCounter.IsFried() && e.progressNormalized >= stoveCounter.BurnWarningThreshold;
-        _animator.SetBool(IS_FLASHING, flash);
+        _animator.SetBool(IsFlashing, flash);
     }
 }

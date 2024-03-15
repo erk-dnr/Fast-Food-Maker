@@ -54,6 +54,19 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Player.Pause.performed += Pause_performed;
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.LogWarning("Right-Click");
+        }
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            Debug.LogError("Middle-Clicl!!!");
+        }
+    }
+
     void OnDestroy()
     {
         _playerInputActions.Player.Disable();
@@ -99,7 +112,8 @@ public class GameInput : MonoBehaviour
             Binding.Pause => _playerInputActions.Player.Pause.bindings[0].ToDisplayString(),
             Binding.Gamepad_Interact => _playerInputActions.Player.Interact.bindings[1].ToDisplayString(),
             Binding.Gamepad_InteractAlternate => _playerInputActions.Player.InteractAlternate.bindings[1].ToDisplayString(),
-            Binding.Gamepad_Pause => _playerInputActions.Player.Pause.bindings[1].ToDisplayString()
+            Binding.Gamepad_Pause => _playerInputActions.Player.Pause.bindings[1].ToDisplayString(),
+            _ => throw new ArgumentOutOfRangeException(nameof(binding), binding, null)
         };
     }
 

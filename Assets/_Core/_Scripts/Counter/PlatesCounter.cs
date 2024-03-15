@@ -1,4 +1,5 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
 public class PlatesCounter : BaseCounter
@@ -27,6 +28,9 @@ public class PlatesCounter : BaseCounter
 
     void Update()
     {
+        if (!IsServer)
+            return;
+        
         if (!GameManager.Instance.IsGamePlaying)
             return;
         
@@ -43,14 +47,26 @@ public class PlatesCounter : BaseCounter
             if (_platesSpawnedAmount < platesSpawnedAmountMax)
             {
                 // can spawn new plate
-                _platesSpawnedAmount++;
-                OnPlateSpawned?.Invoke(this, EventArgs.Empty);
-                if (_platesSpawnedAmount == platesSpawnedAmountMax)
-                {
-                    // maximum amount of plates on the counter
-                    _runPlateSpawnTimer = false;
-                }
+                SpawnPlateServerRpc();
             }
+        }
+    }
+
+    [ServerRpc]
+    void SpawnPlateServerRpc()
+    {
+        SpawnPlateClientRpc();
+    }
+    
+    [ClientRpc]
+    void SpawnPlateClientRpc()
+    {
+        _platesSpawnedAmount++;
+        OnPlateSpawned?.Invoke(this, EventArgs.Empty);
+        if (_platesSpawnedAmount == platesSpawnedAmountMax)
+        {
+            // maximum amount of plates on the counter
+            _runPlateSpawnTimer = false;
         }
     }
 
@@ -61,15 +77,27 @@ public class PlatesCounter : BaseCounter
             // player is empty handed
             if (_platesSpawnedAmount > 0)
             {
-                // there is at least one plate
-                _platesSpawnedAmount--;
-                // new plate can be spawned after time, so restart timer
-                _runPlateSpawnTimer = true;
-
                 KitchenObject.SpawnKitchenObject(plateKitchenObjectSO, player);
                 
-                OnPlateRemoved?.Invoke(this, EventArgs.Empty);
+                InteractLogicServerRpc();
             }
         }
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    void InteractLogicServerRpc()
+    {
+        InteractLogicClientRpc();
+    }
+
+    [ClientRpc]
+    void InteractLogicClientRpc()
+    {
+        // there is at least one plate
+        _platesSpawnedAmount--;
+        // new plate can be spawned after time, so restart timer
+        _runPlateSpawnTimer = true;
+        
+        OnPlateRemoved?.Invoke(this, EventArgs.Empty);
     }
 }

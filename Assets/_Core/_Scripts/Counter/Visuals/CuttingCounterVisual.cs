@@ -8,6 +8,7 @@ public class CuttingCounterVisual : MonoBehaviour
     [SerializeField] CuttingCounter cuttingCounter;
 
     const string CUT = "Cut";
+    static readonly int Cut = Animator.StringToHash(CUT);
     
     Animator _animator;
 
@@ -28,6 +29,6 @@ public class CuttingCounterVisual : MonoBehaviour
 
     void CuttingCounter_OnCut(object sender, EventArgs e)
     {
-        _animator.SetTrigger(CUT);
+        _animator.SetTrigger(Cut);
     }
 }
